@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mlinzi Live Status</title>
+<meta name="description" content="Mlinzi's crypto savings signals, updated daily, with a public forward test.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one reading column; status first, then the coin table, forward test, history, proof. */
+:root {
+  color-scheme: light;
+  --ground: #f3f5f2;
+  --card: #ffffff;
+  --ink: #12261f;
+  --ink-2: #4c5c55;
+  --muted: #8a968f;
+  --line: #dde3dd;
+  --shield: #1d6b55;
+  --shield-soft: #e1efe9;
+  --grow: #a86a0c;
+  --grow-soft: #f8ecd6;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ground: #0f1714; --card: #16211d; --ink: #e6efe9; --ink-2: #a9bab2; --muted: #74867e;
+    --line: #2a3832; --shield: #4fb393; --shield-soft: #1c3229; --grow: #e0a24a; --grow-soft: #33281a;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 16px/1.5 var(--font-body); }
+.wrap { max-width: 980px; margin: 0 auto; padding: 40px 20px 64px; display: grid; gap: 28px; }
+header { display: grid; gap: 6px; }
+.brand { font: 700 15px var(--font-display); color: var(--shield); letter-spacing: .02em; display: flex; align-items: center; gap: 8px; }
+h1 { font: 700 clamp(28px, 4.5vw, 40px)/1.1 var(--font-display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h2 { font: 700 22px/1.2 var(--font-display); margin: 0 0 4px; }
+p { margin: 0; }
+.muted { color: var(--ink-2); }
+.meta { color: var(--ink-2); font-size: 14px; }
+section { display: grid; gap: 14px; }
+.status { border-radius: 20px; padding: 22px; display: grid; gap: 8px; }
+.status.on { background: var(--shield); color: #f2fbf7; }
+.status.in { background: var(--grow-soft); color: var(--ink); border: 1px solid var(--line); }
+.status .pill { justify-self: start; font-size: 13px; font-weight: 600; padding: 3px 12px; border-radius: 999px; background: rgba(255,255,255,.18); }
+.status.in .pill { background: var(--grow); color: #fff; }
+.status strong { font: 700 26px/1.15 var(--font-display); }
+.status p { max-width: 68ch; }
+.status.on p { color: #d3ebe1; }
+.table-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 15px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+thead th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-2); font-weight: 600; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+td.num { text-align: right; }
+thead th.num { text-align: right; }
+.chip { font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
+.chip.in { background: var(--grow-soft); color: var(--grow); }
+.chip.cash { background: var(--shield-soft); color: var(--shield); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: grid; gap: 14px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.tile { border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 2px; }
+.tile b { font: 700 22px var(--font-display); font-variant-numeric: tabular-nums; }
+.label { font-size: 13px; color: var(--ink-2); }
+.spark { width: 100%; height: 160px; display: block; }
+.legend { font-size: 13px; color: var(--ink-2); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.key { display: inline-block; width: 18px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.key.shield { background: var(--shield); }
+.key.dep { background: repeating-linear-gradient(90deg, var(--muted) 0 5px, transparent 5px 9px); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; }
+.timeline li { display: grid; grid-template-columns: 14px 1fr; gap: 12px; padding-bottom: 14px; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: 6px; top: 16px; bottom: 0; width: 2px; background: var(--line); }
+.timeline li:last-child::before { display: none; }
+.timeline .when { display: block; font-weight: 600; }
+.dot { width: 14px; height: 14px; border-radius: 50%; margin-top: 5px; }
+.dot.s { background: var(--shield); }
+.dot.g { background: var(--grow); }
+.proof { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.proof .card p { color: var(--ink-2); }
+img.chart { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); background: #fcfcfb; }
+footer { font-size: 13px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 6px; }
+footer p { max-width: 90ch; }
+a { color: var(--shield); }
+a:focus-visible { outline: 3px solid var(--grow); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="brand">
+    <svg width="16" height="18" viewBox="0 0 20 22" aria-hidden="true"><path d="M10 1 1.5 4.5v6c0 5.2 3.6 9.3 8.5 10.5 4.9-1.2 8.5-5.3 8.5-10.5v-6L10 1Z" fill="currentColor"/><path d="m6 11 3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    MLINZI
+  </span>
+  <h1>Live status: crypto savings with a watchman</h1>
+  <p class="meta">Updated 30 Oct 2026, 12:57 UTC · prices through the daily close of 29 Oct 2026 · refreshes every day</p>
+</header>
+
+<div class="status on" role="status">
+  <span class="pill">Shield ON</span>
+  <strong>All savings held in cash</strong>
+  <p>Every coin's trend has broken, so Mlinzi holds 100% cash. Fully in cash since 14 Oct 2026. It buys back in coin by coin as new uptrends start.</p>
+</div>
+
+<section aria-labelledby="coins-h">
+  <div>
+    <h2 id="coins-h">Today's signal for each coin</h2>
+    <p class="muted">A coin is bought when it closes above its highest close of the last 55 days and above its 200-day average. It is sold when it closes below its lowest close of the last 20 days.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Coin</th><th scope="col" class="num">Price</th><th scope="col" class="num">30 days</th><th scope="col">200-day trend</th><th scope="col">Signal</th><th scope="col">Since</th><th scope="col" class="num">Next move</th></tr></thead>
+      <tbody>
+<tr><th scope="row">BTC</th><td class="num">$77,992</td><td class="num">-6.8%</td><td>Above</td><td><span class="chip cash">In cash</span></td><td>14 Oct 2026</td><td class="num">Buys above $86,620 <span class="muted">(+11.1%)</span></td></tr>
+<tr><th scope="row">ETH</th><td class="num">$2,253</td><td class="num">-15.9%</td><td>Above</td><td><span class="chip cash">In cash</span></td><td>8 Oct 2026</td><td class="num">Buys above $2,776 <span class="muted">(+23.2%)</span></td></tr>
+<tr><th scope="row">SOL</th><td class="num">$95.64</td><td class="num">-19.7%</td><td>Above</td><td><span class="chip cash">In cash</span></td><td>8 Oct 2026</td><td class="num">Buys above $122.15 <span class="muted">(+27.7%)</span></td></tr>
+<tr><th scope="row">BNB</th><td class="num">$698.46</td><td class="num">-7.9%</td><td>Above</td><td><span class="chip cash">In cash</span></td><td>8 Oct 2026</td><td class="num">Buys above $799.41 <span class="muted">(+14.5%)</span></td></tr>
+<tr><th scope="row">XRP</th><td class="num">$1.24</td><td class="num">-17.0%</td><td>Below</td><td><span class="chip cash">In cash</span></td><td>8 Oct 2026</td><td class="num">Buys above $1.57 <span class="muted">(+27.1%)</span></td></tr>
+<tr><th scope="row">ADA</th><td class="num">$0.1904</td><td class="num">-22.1%</td><td>Below</td><td><span class="chip cash">In cash</span></td><td>14 Oct 2026</td><td class="num">Buys above $0.2704 <span class="muted">(+42.0%)</span></td></tr>
+<tr><th scope="row">DOGE</th><td class="num">$0.0753</td><td class="num">-19.8%</td><td>Below</td><td><span class="chip cash">In cash</span></td><td>8 Oct 2026</td><td class="num">Buys above $0.1004 <span class="muted">(+33.4%)</span></td></tr>
+<tr><th scope="row">LTC</th><td class="num">$54.96</td><td class="num">-17.8%</td><td>Above</td><td><span class="chip cash">In cash</span></td><td>12 Oct 2026</td><td class="num">Buys above $72.59 <span class="muted">(+32.1%)</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="fwd-h">
+  <div>
+    <h2 id="fwd-h">Forward test: saving $10 a week since 30 Oct 2026</h2>
+    <p class="muted">A simulated saver deposits $10 every week and Mlinzi manages it with the rules above, on real daily prices, with fees. Each day's result is saved to this page's <a href="https://github.com/SmartServeDigital/mlinzi-status/commits/main">public history</a>, so the record is timestamped as it happens. Simulated money, not a real account.</p>
+  </div>
+  <div class="card">
+<p class="muted">The forward test starts with the first completed day after 30 Oct 2026. The first numbers appear tomorrow.</p>
+  </div>
+</section>
+
+<section aria-labelledby="hist-h">
+  <h2 id="hist-h">Signal changes, last 90 days</h2>
+  <div class="card">
+    <ul class="timeline">
+<li><i class="dot s"></i><div><span class="when">14 Oct 2026</span><span><b>Moved to cash:</b> ADA, BTC</span></div></li>
+<li><i class="dot s"></i><div><span class="when">12 Oct 2026</span><span><b>Moved to cash:</b> LTC</span></div></li>
+<li><i class="dot s"></i><div><span class="when">8 Oct 2026</span><span><b>Moved to cash:</b> BNB, DOGE, ETH, SOL, XRP</span></div></li>
+<li><i class="dot g"></i><div><span class="when">21 Sep 2026</span><span><b>Invested:</b> BTC, DOGE, XRP</span></div></li>
+<li><i class="dot g"></i><div><span class="when">18 Sep 2026</span><span><b>Invested:</b> SOL</span></div></li>
+<li><i class="dot s"></i><div><span class="when">15 Sep 2026</span><span><b>Moved to cash:</b> DOGE, SOL</span></div></li>
+<li><i class="dot s"></i><div><span class="when">10 Sep 2026</span><span><b>Moved to cash:</b> BTC, XRP</span></div></li>
+<li><i class="dot g"></i><div><span class="when">21 Aug 2026</span><span><b>Invested:</b> ADA, DOGE, LTC, XRP</span></div></li>
+<li><i class="dot g"></i><div><span class="when">19 Aug 2026</span><span><b>Invested:</b> BNB, BTC, ETH, SOL</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="proof-h">
+  <h2 id="proof-h">Track record</h2>
+  <div class="proof">
+    <div class="card">
+      <h3 style="margin:0;font:700 17px var(--font-display)">Backtest, 2021 to today</h3>
+      <img class="chart" src="savings_backtest.png" alt="Chart: saving $10 a week since January 2021. Mlinzi ends near $4,700 with a worst fall of about 25%; buy and hold ends near $4,150 after falls of 74% in 2022 and 62% in 2025–26; cash only is $3,040.">
+      <p>Simulated on historical Binance prices with fees. Mlinzi fell 13% in the 2022 crash and 2% in the 2025–26 crash, against 74% and 62% for buy and hold.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin:0;font:700 17px var(--font-display)">Real money, July–August 2026</h3>
+      <p>The same bot ran 24/7 on a cloud server against a real Binance account, with trade-only API keys (withdrawals disabled) and Telegram alerts. It held cash through the July downtrend and placed 23 real buy orders on 28–29 August when uptrends returned.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Mlinzi is an early-stage project. This page is for information and is not financial advice. Crypto is volatile and you can lose money; past and simulated results do not guarantee future returns.</p>
+</footer>
+
+</div>
+</body>
+</html>

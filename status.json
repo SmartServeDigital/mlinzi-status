@@ -1,0 +1,328 @@
+{
+  "updated_utc": "2026-10-30T12:57+00:00",
+  "data_through": "2026-10-29",
+  "coins_invested": 0,
+  "target_invested_pct": 0.0,
+  "shield_on_since": "2026-10-14",
+  "coins": {
+    "BTC": {
+      "price": 77991.89,
+      "change_30d_pct": -6.8,
+      "above_200d": true,
+      "invested": false,
+      "weight": 0.0,
+      "since": "2026-10-14",
+      "trigger": 86620.0,
+      "trigger_pct": 11.1,
+      "events": [
+        {
+          "date": "2026-08-19",
+          "invested": true
+        },
+        {
+          "date": "2026-09-10",
+          "invested": false
+        },
+        {
+          "date": "2026-09-21",
+          "invested": true
+        },
+        {
+          "date": "2026-10-14",
+          "invested": false
+        }
+      ]
+    },
+    "ETH": {
+      "price": 2253.13,
+      "change_30d_pct": -15.9,
+      "above_200d": true,
+      "invested": false,
+      "weight": 0.0,
+      "since": "2026-10-08",
+      "trigger": 2776.19,
+      "trigger_pct": 23.2,
+      "events": [
+        {
+          "date": "2026-08-19",
+          "invested": true
+        },
+        {
+          "date": "2026-10-08",
+          "invested": false
+        }
+      ]
+    },
+    "SOL": {
+      "price": 95.64,
+      "change_30d_pct": -19.7,
+      "above_200d": true,
+      "invested": false,
+      "weight": 0.0,
+      "since": "2026-10-08",
+      "trigger": 122.15,
+      "trigger_pct": 27.7,
+      "events": [
+        {
+          "date": "2026-08-19",
+          "invested": true
+        },
+        {
+          "date": "2026-09-15",
+          "invested": false
+        },
+        {
+          "date": "2026-09-18",
+          "invested": true
+        },
+        {
+          "date": "2026-10-08",
+          "invested": false
+        }
+      ]
+    },
+    "BNB": {
+      "price": 698.46,
+      "change_30d_pct": -7.9,
+      "above_200d": true,
+      "invested": false,
+      "weight": 0.0,
+      "since": "2026-10-08",
+      "trigger": 799.41,
+      "trigger_pct": 14.5,
+      "events": [
+        {
+          "date": "2026-08-19",
+          "invested": true
+        },
+        {
+          "date": "2026-10-08",
+          "invested": false
+        }
+      ]
+    },
+    "XRP": {
+      "price": 1.2377,
+      "change_30d_pct": -17.0,
+      "above_200d": false,
+      "invested": false,
+      "weight": 0.0,
+      "since": "2026-10-08",
+      "trigger": 1.5727,
+      "trigger_pct": 27.1,
+      "events": [
+        {
+          "date": "2026-08-21",
+          "invested": true
+        },
+        {
+          "date": "2026-09-10",
+          "invested": false
+        },
+        {
+          "date": "2026-09-21",
+          "invested": true
+        },
+        {
+          "date": "2026-10-08",
+          "invested": false
+        }
+      ]
+    },
+    "ADA": {
+      "price": 0.1904,
+      "change_30d_pct": -22.1,
+      "above_200d": false,
+      "invested": false,
+      "weight": 0.0,
+      "since": "2026-10-14",
+      "trigger": 0.2704,
+      "trigger_pct": 42.0,
+      "events": [
+        {
+          "date": "2026-08-21",
+          "invested": true
+        },
+        {
+          "date": "2026-10-14",
+          "invested": false
+        }
+      ]
+    },
+    "DOGE": {
+      "price": 0.07527,
+      "change_30d_pct": -19.8,
+      "above_200d": false,
+      "invested": false,
+      "weight": 0.0,
+      "since": "2026-10-08",
+      "trigger": 0.10044,
+      "trigger_pct": 33.4,
+      "events": [
+        {
+          "date": "2026-08-21",
+          "invested": true
+        },
+        {
+          "date": "2026-09-15",
+          "invested": false
+        },
+        {
+          "date": "2026-09-21",
+          "invested": true
+        },
+        {
+          "date": "2026-10-08",
+          "invested": false
+        }
+      ]
+    },
+    "LTC": {
+      "price": 54.96,
+      "change_30d_pct": -17.8,
+      "above_200d": true,
+      "invested": false,
+      "weight": 0.0,
+      "since": "2026-10-12",
+      "trigger": 72.59,
+      "trigger_pct": 32.1,
+      "events": [
+        {
+          "date": "2026-08-21",
+          "invested": true
+        },
+        {
+          "date": "2026-10-12",
+          "invested": false
+        }
+      ]
+    }
+  },
+  "events": [
+    {
+      "date": "2026-10-14",
+      "coin": "BTC",
+      "invested": false
+    },
+    {
+      "date": "2026-10-14",
+      "coin": "ADA",
+      "invested": false
+    },
+    {
+      "date": "2026-10-12",
+      "coin": "LTC",
+      "invested": false
+    },
+    {
+      "date": "2026-10-08",
+      "coin": "XRP",
+      "invested": false
+    },
+    {
+      "date": "2026-10-08",
+      "coin": "SOL",
+      "invested": false
+    },
+    {
+      "date": "2026-10-08",
+      "coin": "ETH",
+      "invested": false
+    },
+    {
+      "date": "2026-10-08",
+      "coin": "DOGE",
+      "invested": false
+    },
+    {
+      "date": "2026-10-08",
+      "coin": "BNB",
+      "invested": false
+    },
+    {
+      "date": "2026-09-21",
+      "coin": "XRP",
+      "invested": true
+    },
+    {
+      "date": "2026-09-21",
+      "coin": "DOGE",
+      "invested": true
+    },
+    {
+      "date": "2026-09-21",
+      "coin": "BTC",
+      "invested": true
+    },
+    {
+      "date": "2026-09-18",
+      "coin": "SOL",
+      "invested": true
+    },
+    {
+      "date": "2026-09-15",
+      "coin": "SOL",
+      "invested": false
+    },
+    {
+      "date": "2026-09-15",
+      "coin": "DOGE",
+      "invested": false
+    },
+    {
+      "date": "2026-09-10",
+      "coin": "XRP",
+      "invested": false
+    },
+    {
+      "date": "2026-09-10",
+      "coin": "BTC",
+      "invested": false
+    },
+    {
+      "date": "2026-08-21",
+      "coin": "XRP",
+      "invested": true
+    },
+    {
+      "date": "2026-08-21",
+      "coin": "LTC",
+      "invested": true
+    },
+    {
+      "date": "2026-08-21",
+      "coin": "DOGE",
+      "invested": true
+    },
+    {
+      "date": "2026-08-21",
+      "coin": "ADA",
+      "invested": true
+    },
+    {
+      "date": "2026-08-19",
+      "coin": "SOL",
+      "invested": true
+    },
+    {
+      "date": "2026-08-19",
+      "coin": "ETH",
+      "invested": true
+    },
+    {
+      "date": "2026-08-19",
+      "coin": "BTC",
+      "invested": true
+    },
+    {
+      "date": "2026-08-19",
+      "coin": "BNB",
+      "invested": true
+    }
+  ],
+  "forward_test": {
+    "start": "2026-10-30",
+    "weekly_usd": 10.0,
+    "days": []
+  }
+}
