@@ -93,9 +93,10 @@ a { color: var(--shield); }
 
 <section class="card" aria-label="Result">
   <p class="verdict" id="verdict" role="status"></p>
+  <p class="sub" id="feel"></p>
   <div class="table-wrap">
     <table>
-      <thead><tr><th scope="col">If you...</th><th scope="col">You'd have</th><th scope="col">Gain</th><th scope="col">Worst fall</th></tr></thead>
+      <thead><tr><th scope="col">If you...</th><th scope="col">You'd have</th><th scope="col">Gain</th><th scope="col">Worst fall</th><th scope="col">Days 20%+ down</th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
   </div>
@@ -148,6 +149,15 @@ function worst(series, key) {
   return 100 * low;
 }
 
+function daysDown(series, key) {
+  var peak = 0, days = 0;
+  series.forEach(function (p) {
+    if (p[key] > peak) peak = p[key];
+    if (peak > 0 && p[key] / peak - 1 < -0.2) days++;
+  });
+  return days;
+}
+
 var startInput = document.getElementById('start');
 var amountInput = document.getElementById('amount');
 var presetDefs = [['Jan 2021', '2021-01'], ['Top of 2021', '2021-11'], ['Jan 2023', '2023-01'], ['Top of 2025', '2025-10'], ['Rules fixed, Jul 2026', '2026-07']];
@@ -187,12 +197,12 @@ function render() {
   var last = series[series.length - 1];
   var wM = worst(series, 'mlinzi'), wH = worst(series, 'hold');
   var rows = [
-    ['var(--s-mlinzi)', 'Saved with Mlinzi', last.mlinzi, wM],
-    ['var(--s-hold)', 'Bought and held', last.hold, wH],
-    ['var(--s-cash)', 'Kept it as cash', last.cash, 0]
+    ['var(--s-mlinzi)', 'Saved with Mlinzi', last.mlinzi, wM, daysDown(series, 'mlinzi')],
+    ['var(--s-hold)', 'Bought and held', last.hold, wH, daysDown(series, 'hold')],
+    ['var(--s-cash)', 'Kept it as cash', last.cash, 0, 0]
   ];
   document.getElementById('rows').innerHTML = rows.map(function (r) {
-    return '<tr><td><span class="key" style="background:' + r[0] + '"></span>' + r[1] + '</td><td>' + fmt(r[2]) + '</td><td>' + pct(100 * (r[2] / last.cash - 1)) + '</td><td>' + fall(r[3]) + '</td></tr>';
+    return '<tr><td><span class="key" style="background:' + r[0] + '"></span>' + r[1] + '</td><td>' + fmt(r[2]) + '</td><td>' + pct(100 * (r[2] / last.cash - 1)) + '</td><td>' + fall(r[3]) + '</td><td>' + r[4].toLocaleString('en-US') + '</td></tr>';
   }).join('');
   var diff = last.mlinzi - last.hold, lead;
   if (Math.abs(diff) < last.cash * 0.01) lead = 'Mlinzi and buy and hold end about level';
@@ -200,6 +210,7 @@ function render() {
   else lead = 'Buy and hold ends ' + fmt(-diff) + ' ahead of Mlinzi';
   var ride = Math.abs(wM) < Math.abs(wH) - 1 ? ', with a worst fall of ' + fall(wM) + ' against ' + fall(wH) + '.' : '.';
   document.getElementById('verdict').textContent = lead + ride;
+  document.getElementById('feel').textContent = 'Out of ' + series.length.toLocaleString('en-US') + ' days, holding left you more than 20% below your high for ' + rows[1][4].toLocaleString('en-US') + ' of them. With Mlinzi it was ' + rows[0][4].toLocaleString('en-US') + '.';
   draw();
 }
 
