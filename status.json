@@ -1,19 +1,19 @@
 {
-  "updated_utc": "2026-11-09T00:20+00:00",
-  "data_through": "2026-11-08",
+  "updated_utc": "2026-11-10T00:20+00:00",
+  "data_through": "2026-11-09",
   "coins_invested": 0,
   "target_invested_pct": 0.0,
   "shield_on_since": "2026-10-14",
   "coins": {
     "BTC": {
-      "price": 74851.44,
-      "change_30d_pct": -9.4,
+      "price": 75368.41,
+      "change_30d_pct": -9.2,
       "above_200d": true,
       "invested": false,
       "weight": 0.0,
       "since": "2026-10-14",
       "trigger": 86620.0,
-      "trigger_pct": 15.7,
+      "trigger_pct": 14.9,
       "events": [
         {
           "date": "2026-08-19",
@@ -34,14 +34,14 @@
       ]
     },
     "ETH": {
-      "price": 2127.46,
-      "change_30d_pct": -14.5,
+      "price": 2135.24,
+      "change_30d_pct": -14.8,
       "above_200d": false,
       "invested": false,
       "weight": 0.0,
       "since": "2026-10-08",
       "trigger": 2776.19,
-      "trigger_pct": 30.5,
+      "trigger_pct": 30.0,
       "events": [
         {
           "date": "2026-08-19",
@@ -54,14 +54,14 @@
       ]
     },
     "SOL": {
-      "price": 86.54,
-      "change_30d_pct": -20.7,
+      "price": 86.74,
+      "change_30d_pct": -21.2,
       "above_200d": false,
       "invested": false,
       "weight": 0.0,
       "since": "2026-10-08",
       "trigger": 122.15,
-      "trigger_pct": 41.1,
+      "trigger_pct": 40.8,
       "events": [
         {
           "date": "2026-08-19",
@@ -82,14 +82,14 @@
       ]
     },
     "BNB": {
-      "price": 685.21,
-      "change_30d_pct": -7.7,
+      "price": 691.44,
+      "change_30d_pct": -7.8,
       "above_200d": true,
       "invested": false,
       "weight": 0.0,
       "since": "2026-10-08",
       "trigger": 799.41,
-      "trigger_pct": 16.7,
+      "trigger_pct": 15.6,
       "events": [
         {
           "date": "2026-08-19",
@@ -102,14 +102,14 @@
       ]
     },
     "XRP": {
-      "price": 1.1132,
-      "change_30d_pct": -20.2,
+      "price": 1.0989,
+      "change_30d_pct": -21.6,
       "above_200d": false,
       "invested": false,
       "weight": 0.0,
       "since": "2026-10-08",
       "trigger": 1.5727,
-      "trigger_pct": 41.3,
+      "trigger_pct": 43.1,
       "events": [
         {
           "date": "2026-08-21",
@@ -130,14 +130,14 @@
       ]
     },
     "ADA": {
-      "price": 0.1753,
-      "change_30d_pct": -27.9,
+      "price": 0.1774,
+      "change_30d_pct": -28.8,
       "above_200d": false,
       "invested": false,
       "weight": 0.0,
       "since": "2026-10-14",
       "trigger": 0.2704,
-      "trigger_pct": 54.2,
+      "trigger_pct": 52.4,
       "events": [
         {
           "date": "2026-08-21",
@@ -150,14 +150,14 @@
       ]
     },
     "DOGE": {
-      "price": 0.06896,
-      "change_30d_pct": -19.2,
+      "price": 0.07007,
+      "change_30d_pct": -18.3,
       "above_200d": false,
       "invested": false,
       "weight": 0.0,
       "since": "2026-10-08",
       "trigger": 0.10044,
-      "trigger_pct": 45.6,
+      "trigger_pct": 43.3,
       "events": [
         {
           "date": "2026-08-21",
@@ -178,14 +178,14 @@
       ]
     },
     "LTC": {
-      "price": 50.11,
-      "change_30d_pct": -21.0,
+      "price": 51.42,
+      "change_30d_pct": -19.7,
       "above_200d": false,
       "invested": false,
       "weight": 0.0,
       "since": "2026-10-12",
       "trigger": 72.59,
-      "trigger_pct": 44.9,
+      "trigger_pct": 41.2,
       "events": [
         {
           "date": "2026-08-21",
@@ -392,6 +392,13 @@
         "deposited": 20.0,
         "value": 20.0,
         "buy_hold": 18.79,
+        "invested_pct": 0.0
+      },
+      {
+        "date": "2026-11-09",
+        "deposited": 20.0,
+        "value": 20.0,
+        "buy_hold": 18.94,
         "invested_pct": 0.0
       }
     ]
